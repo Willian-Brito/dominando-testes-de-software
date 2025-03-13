@@ -30,8 +30,6 @@ public class ClienteTestsFixture : IDisposable
             true,
             DateTime.Now);
     }
-
-    public void Dispose()
-    {
-    }
+ 
+    public void Dispose() { }
 }
