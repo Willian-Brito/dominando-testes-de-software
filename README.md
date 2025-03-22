@@ -6,7 +6,6 @@ Antes de iniciar os testes, configurar:
 - Mocks para dependências, como serviços auxiliares e validações.  
 - Um framework de testes, como xUnit, NUnit ou MSTest (para C#).  
 
----
 
 ## 📄 2. Padrão de Nomenclatura dos Testes  
 
@@ -51,7 +50,6 @@ O terceiro termo especifica a condição ou contexto em que o teste ocorre. Exem
 - **Facilidade na depuração** → Quando um teste falha, o nome do método já indica o possível problema.  
 - **Boa prática** → Esse padrão é amplamente adotado, facilitando a colaboração entre desenvolvedores.  
 
----
 
 ## *️⃣ 3. Testes de Campos Obrigatórios  
 
@@ -69,7 +67,6 @@ O terceiro termo especifica a condição ou contexto em que o teste ocorre. Exem
   - **Exception:** `InvalidFieldException`  
   - Deve lançar uma exceção se um campo estiver em um formato inválido.
 
----
 
 ## 💾 4. Testes para Create (Adicionar Registro)  
 
@@ -88,8 +85,8 @@ O terceiro termo especifica a condição ou contexto em que o teste ocorre. Exem
   - Exemplo: **DuplicateRecordException** ao tentar inserir um item com uma chave única já existente.
 - `Create_ShouldThrowBusinessRuleException_WhenDataIsInconsistent`  
   - Deve lançar uma exceção ao tentar criar um registro com valores inconsistentes.  
-  - Exemplo: **BusinessRuleException** ao cadastrar um produto com estoque negativo.
----
+  - Exemplo: **BusinessRuleException** ao cadastrar um produto com estoque negativo
+
 
 ## 📖 5. Testes para Read (Consultar Registro)  
 
@@ -109,7 +106,6 @@ O terceiro termo especifica a condição ou contexto em que o teste ocorre. Exem
   - Deve lançar uma exceção ao passar um ID inválido.  
   - Exemplo: **ArgumentException** quando o ID é nulo ou menor que zero.
 
----
 
 ## 📝 6. Testes para Update (Atualizar Registro)  
 
@@ -133,7 +129,6 @@ O terceiro termo especifica a condição ou contexto em que o teste ocorre. Exem
   - Deve lançar uma exceção ao tentar atualizar um registro para um estado inconsistente.  
   - Exemplo: **BusinessRuleException** ao tentar marcar um pedido como "entregue" sem ter sido "enviado".
 
----
 
 ## 🗑 7. Testes para Delete (Remover Registro)  
 
