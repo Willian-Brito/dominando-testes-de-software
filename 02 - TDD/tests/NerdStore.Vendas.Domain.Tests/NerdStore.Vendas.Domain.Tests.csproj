@@ -18,4 +18,15 @@
     <Using Include="Xunit" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\NerdStore.Core\NerdStore.Core.csproj" />
+    <ProjectReference Include="..\..\src\NerdStore.Vendas.Domain\NerdStore.Vendas.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="FluentValidation">
+      <HintPath>..\..\..\..\..\..\..\.nuget\packages\fluentvalidation\11.11.0\lib\net8.0\FluentValidation.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
