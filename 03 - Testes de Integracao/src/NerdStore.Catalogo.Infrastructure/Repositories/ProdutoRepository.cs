@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore;
-using NerdStore.Catalogo.Data.Context;
+using NerdStore.Catalogo.Infrastructure;
 using NerdStore.Catalogo.Domain;
 using NerdStore.Core.Data;
 
-namespace NerdStore.Catalogo.Data.Repositories;
+namespace NerdStore.Catalogo.Infrastructure.Repositories;
 
 public class ProdutoRepository : IProdutoRepository
 {

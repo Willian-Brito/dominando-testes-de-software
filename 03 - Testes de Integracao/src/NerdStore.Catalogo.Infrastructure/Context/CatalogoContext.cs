@@ -1,27 +1,46 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using NerdStore.Catalogo.Domain;
 using NerdStore.Core.Data;
 using NerdStore.Core.Messages;
 
-namespace NerdStore.Catalogo.Data.Context;
+namespace NerdStore.Catalogo.Infrastructure;
 
 public class CatalogoContext : DbContext, IUnitOfWork
 {
-    public CatalogoContext(DbContextOptions<CatalogoContext> options)
-        : base(options) { }
-
     public DbSet<Produto> Produtos { get; set; }
     public DbSet<Categoria> Categorias { get; set; }
-
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    public CatalogoContext(){ }
+    public CatalogoContext(DbContextOptions<CatalogoContext> options) : base(options) { }
+    
+    protected override void OnModelCreating(ModelBuilder builder)
     {
-        foreach (var property in modelBuilder.Model.GetEntityTypes().SelectMany(
-                     e => e.GetProperties().Where(p => p.ClrType == typeof(string))))
+        base.OnModelCreating(builder);
+
+        foreach (var property in builder.Model.GetEntityTypes().SelectMany(e => e.GetProperties().Where(p => p.ClrType == typeof(string))))
             property.SetColumnType("varchar(100)");
 
-        modelBuilder.Ignore<Event>();
+        builder.Entity<Produto>()
+            .Property(p => p.Valor)
+            .HasColumnType("decimal(18,2)");
 
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(CatalogoContext).Assembly);
+        builder.Ignore<Event>();
+
+        builder.ApplyConfigurationsFromAssembly(typeof(CatalogoContext).Assembly);
+    }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        if(!optionsBuilder.IsConfigured)
+        {
+            var connectionString = "Server=localhost; Database=NerdStoreDB; User Id=sa; Password=sql@2019; TrustServerCertificate=True;";
+
+            base.OnConfiguring(optionsBuilder);
+            optionsBuilder.UseSqlServer(connectionString);
+
+        }
+             
+        optionsBuilder.ConfigureWarnings(warnings => warnings.Ignore(RelationalEventId.PendingModelChangesWarning));
     }
 
     public async Task<bool> Commit()
@@ -38,7 +57,7 @@ public class CatalogoContext : DbContext, IUnitOfWork
                 entry.Property("DataCadastro").IsModified = false;
             }
         }
-            
+
         return await base.SaveChangesAsync() > 0;
     }
 }
