@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using NerdStore.Catalogo.Application.AutoMapper;
-using NerdStore.Catalogo.Data.Context;
+using NerdStore.Catalogo.Infrastructure;
 using NerdStore.Vendas.Infrastructure;
 using NerdStore.WebApp.MVC.Data;
 using NerdStore.WebApp.MVC.Setup;
@@ -28,61 +28,12 @@ public class Startup
             options.MinimumSameSitePolicy = SameSiteMode.None;
         });
 
-        services.AddDbContext<ApplicationDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
-        services.AddDbContext<CatalogoContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
-        services.AddDbContext<VendasContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
-        services.AddDefaultIdentity<IdentityUser>()
-            .AddDefaultUI()
-            .AddEntityFrameworkStores<ApplicationDbContext>();
-
-        services.AddMvc();
+        services.AddDatabaseContext(Configuration);
+        services.AddControllersWithViews();
+        services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
+        services.AddDependencyInjection();
+        services.AddInfrastructureJWT();
         services.AddHttpContextAccessor();
-
-        services.AddSwaggerGen(c =>
-        {
-            c.SwaggerDoc("v1", new OpenApiInfo
-            {
-                Title = "desenvolvedor.io API",
-                Description = "desenvolvedor.io API",
-                Contact = new OpenApiContact { Name = "desenvolvedor.io", Email = "email@desenvolvedor.io" },
-                License = new OpenApiLicense { Name = "MIT", Url = new Uri("https://opensource.org/licenses/MIT") }
-            });
-
-            c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-            {
-                Description = "Insira o token JWT desta maneira: Bearer {seu token}",
-                Name = "Authorization",
-                In = ParameterLocation.Header,
-                Type = SecuritySchemeType.ApiKey
-            });
-
-            c.AddSecurityRequirement(new OpenApiSecurityRequirement
-            {
-                {
-                    new OpenApiSecurityScheme
-                    {
-                        Reference = new OpenApiReference
-                        {
-                            Type = ReferenceType.SecurityScheme,
-                            Id = "Bearer"
-                        }
-                    },
-                    new string[] {}
-                }
-            });
-        });
-
-        services.AddAutoMapper(typeof(DomainToViewModelMappingProfile), typeof(ViewModelToDomainMappingProfile));
-
-        // services.AddMediatR(typeof(Startup));
-
-        services.RegisterServices();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -103,14 +54,18 @@ public class Startup
         app.UseHttpsRedirection();
         app.UseStaticFiles();
         app.UseCookiePolicy();
+        app.UseRouting();
 
         app.UseAuthentication();
+        // app.UseAuthorization();
 
-        app.UseMvc(routes =>
+        app.UseEndpoints(endpoints =>
         {
-            routes.MapRoute(
+            endpoints.MapControllerRoute(
                 name: "default",
-                template: "{controller=Vitrine}/{action=Index}/{id?}");
+                pattern: "{controller=Vitrine}/{action=Index}/{id?}");
+
+            endpoints.MapRazorPages();
         });
 
         app.UseSwagger();
