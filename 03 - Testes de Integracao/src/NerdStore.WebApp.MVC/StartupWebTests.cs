@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Identity;
+using NerdStore.WebApp.MVC.Data;
 using NerdStore.WebApp.MVC.Setup;
 
 namespace NerdStore.WebApp.MVC;
@@ -47,7 +49,8 @@ public class StartupWebTests
             app.UseExceptionHandler("/Home/Error");
             app.UseHsts();
         }
-
+        
+        app.ApplyMigrations();
         app.UseHttpsRedirection();
         app.UseStaticFiles();
         app.UseRouting();

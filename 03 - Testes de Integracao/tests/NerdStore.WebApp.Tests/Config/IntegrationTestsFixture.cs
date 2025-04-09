@@ -1,9 +1,11 @@
+using System.Net.Http.Json;
 using System.Text.RegularExpressions;
 using Bogus;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 using NerdStore.WebApp.MVC;
+using NerdStore.WebApp.MVC.Models;
 
 namespace NerdStore.WebApp.Tests.Config;
 
@@ -45,11 +47,33 @@ public class IntegrationTestsFixture<TStartup> : IDisposable where TStartup : cl
         UsuarioEmail = faker.Internet.Email().ToLower();
         UsuarioSenha = faker.Internet.Password(8, false, "", "@1Ab_");
     }
+
+    public async Task RealizarLoginApi()
+    {
+        await CriarUsuario();
+        await LoginAPI();
+    }
     
     public async Task RealizarLoginWeb()
     {
         await CriarUsuario();
         await LoginWeb();
+    }
+
+    private async Task LoginAPI()
+    {
+        var userData = new LoginViewModel
+        {
+            Email = UsuarioEmail,
+            Senha = UsuarioSenha
+        };
+        
+        // Recriando o client para evitar configurações de Web
+        Client = Factory.CreateClient();
+        
+        var response = await Client.PostAsJsonAsync("api/login", userData);
+        response.EnsureSuccessStatusCode();
+        UsuarioToken = await response.Content.ReadAsStringAsync();
     }
     
     private async Task LoginWeb()

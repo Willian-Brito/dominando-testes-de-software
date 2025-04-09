@@ -50,14 +50,15 @@ public class Startup
             // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
             app.UseHsts();
         }
-
+        
+        app.ApplyMigrations();
         app.UseHttpsRedirection();
         app.UseStaticFiles();
         app.UseCookiePolicy();
         app.UseRouting();
 
         app.UseAuthentication();
-        // app.UseAuthorization();
+        app.UseAuthorization();
 
         app.UseEndpoints(endpoints =>
         {
@@ -71,7 +72,7 @@ public class Startup
         app.UseSwagger();
         app.UseSwaggerUI(s =>
         {
-            s.SwaggerEndpoint("/swagger/v1/swagger.json", "desenvolvedor.io API v1.0");
+            s.SwaggerEndpoint("/swagger/v1/swagger.json", "nerdstore.io API v1.0");
         });
     }
 }
