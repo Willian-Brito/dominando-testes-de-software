@@ -106,7 +106,8 @@ public class CarrinhoControllerAPI : ControllerBase
 
         if (result.Succeeded)
         {
-            return Ok(await GerarJwt(login.Email));
+            var token = await GerarJwt(login.Email);
+            return Ok(token);
         }
 
         NotificarErro("login","Usuário ou Senha incorretos");
@@ -130,9 +131,10 @@ public class CarrinhoControllerAPI : ControllerBase
         {
             Issuer = _appSettings.Emissor,
             Audience = _appSettings.ValidoEm,
+            NotBefore = DateTime.Now,
             Subject = identityClaims,
-            Expires = DateTime.UtcNow.AddHours(_appSettings.ExpiracaoHoras),
-            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            Expires = DateTime.Now.AddHours(_appSettings.ExpiracaoHoras),
+            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256)
         });
 
         var tokenResult = tokenHandler.WriteToken(token);

@@ -51,10 +51,10 @@ public static class DependencyInjection
             options.UseSqlServer(connectionString));
         
         services.AddDatabaseDeveloperPageExceptionFilter();
-        
         services.AddDefaultIdentity<IdentityUser>()
             .AddDefaultUI()
-            .AddEntityFrameworkStores<ApplicationDbContext>();
+            .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddDefaultTokenProviders();
         
         services.AddDbContext<CatalogoContext>(options =>
             options.UseSqlServer(connectionString, x => x.MigrationsAssembly(typeof(CatalogoContext).Namespace)));
@@ -85,9 +85,9 @@ public static class DependencyInjection
         {
              c.SwaggerDoc("v1", new OpenApiInfo
              {
-                 Title = "desenvolvedor.io API",
-                 Description = "desenvolvedor.io API",
-                 Contact = new OpenApiContact { Name = "desenvolvedor.io", Email = "email@desenvolvedor.io" },
+                 Title = "Nerd Store API",
+                 Description = "Nerd Store API",
+                 Contact = new OpenApiContact { Name = "Nerd Store", Email = "email@nerdstore.io" },
                  License = new OpenApiLicense { Name = "MIT", Url = new Uri("https://opensource.org/licenses/MIT") }
              });
 
