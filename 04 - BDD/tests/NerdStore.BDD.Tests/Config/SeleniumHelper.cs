@@ -31,71 +31,72 @@ public class SeleniumHelper : IDisposable
     
     public bool ValidarConteudoUrl(string conteudo)
     {
-        return Wait.Until(ExpectedConditions.UrlContains(conteudo));
+        return Wait.Until(driver => driver.Url.Contains(conteudo));
     }
 
     public void ClicarLinkPorTexto(string linkText)
     {
-        var link = Wait.Until(ExpectedConditions.ElementIsVisible(By.LinkText(linkText)));
+        var link = EsperarElementoVisivel(By.PartialLinkText(linkText));
         link.Click();
     }
+
     public void ClicarBotaoPorId(string botaoId)
     {
-        var botao = Wait.Until(ExpectedConditions.ElementIsVisible(By.Id(botaoId)));
+        var botao = EsperarElementoVisivel(By.Id(botaoId));
         botao.Click();
     }
 
     public void ClicarPorXPath(string xPath)
     {
-        var elemento = Wait.Until(ExpectedConditions.ElementIsVisible(By.XPath(xPath)));
+        var elemento = EsperarElementoVisivel(By.XPath(xPath));
         elemento.Click();
     }
 
     public IWebElement ObterElementoPorClasse(string classeCss)
     {
-        return Wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName(classeCss)));
+        return EsperarElementoVisivel(By.ClassName(classeCss));
     }
 
     public IWebElement ObterElementoPorXPath(string xPath)
     {
-        return Wait.Until(ExpectedConditions.ElementIsVisible(By.XPath(xPath)));
+        return EsperarElementoVisivel(By.XPath(xPath));
     }
 
     public void PreencherTextBoxPorId(string idCampo, string valorCampo)
     {
-        var campo = Wait.Until(ExpectedConditions.ElementIsVisible(By.Id(idCampo)));
+        var campo = EsperarElementoVisivel(By.Id(idCampo));
+        campo.Clear();
         campo.SendKeys(valorCampo);
     }
 
     public void PreencherDropDownPorId(string idCampo, string valorCampo)
     {
-        var campo = Wait.Until(ExpectedConditions.ElementIsVisible(By.Id(idCampo)));
+        var campo = EsperarElementoVisivel(By.Id(idCampo));
         var selectElement = new SelectElement(campo);
         selectElement.SelectByValue(valorCampo);
     }
 
     public string ObterTextoElementoPorClasseCss(string className)
     {
-        return Wait.Until(ExpectedConditions.ElementIsVisible(By.ClassName(className))).Text;
+        return EsperarElementoVisivel(By.ClassName(className)).Text;
     }
 
     public string ObterTextoElementoPorId(string id)
     {
-        return Wait.Until(ExpectedConditions.ElementIsVisible(By.Id(id))).Text;
+        return EsperarElementoVisivel(By.Id(id)).Text;
     }
 
     public string ObterValorTextBoxPorId(string id)
     {
-        return Wait.Until(ExpectedConditions.ElementIsVisible(By.Id(id)))
-            .GetAttribute("value");
+        return EsperarElementoVisivel(By.Id(id)).GetAttribute("value");
     }
 
     public IEnumerable<IWebElement> ObterListaPorClasse(string className)
     {
-        return Wait.Until(ExpectedConditions.PresenceOfAllElementsLocatedBy(By.ClassName(className)));
+        return EsperarElementosPresentes(By.ClassName(className));
     }
 
-    public bool ValidarSeElementoExistePorIr(string id)
+    public bool ValidarSeElementoExistePorId(string id)
     {
         return ElementoExistente(By.Id(id));
     }
@@ -110,7 +111,7 @@ public class SeleniumHelper : IDisposable
 
     public void ObterScreenShot(string nome)
     {
-        SalvarScreenShot(WebDriver.TakeScreenshot(), string.Format("{0}_" + nome + ".png", DateTime.Now.ToFileTime()));
+        SalvarScreenShot(WebDriver.TakeScreenshot(), $"{DateTime.Now.ToFileTime()}_{nome}.png");
     }
 
     private void SalvarScreenShot(Screenshot screenshot, string fileName)
@@ -130,6 +131,24 @@ public class SeleniumHelper : IDisposable
         {
             return false;
         }
+    }
+    
+    private IWebElement EsperarElementoVisivel(By by)
+    {
+        return Wait.Until(driver =>
+        {
+            var el = driver.FindElement(by);
+            return el.Displayed ? el : null;
+        });
+    }
+
+    private IEnumerable<IWebElement> EsperarElementosPresentes(By by)
+    {
+        return Wait.Until(driver =>
+        {
+            var list = driver.FindElements(by);
+            return list.Any() ? list : null;
+        });
     }
     
     public void Dispose()

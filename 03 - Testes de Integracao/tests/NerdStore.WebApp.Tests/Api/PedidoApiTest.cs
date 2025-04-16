@@ -24,7 +24,7 @@ public class PedidoApiTest
     public async Task AdicionarItem_NovoPedido_DeveRetornarComSucesso()
     {
         // Arrange
-        var itemInfo = new ItemViewModel
+        var item = new ItemViewModel
         {
             Id = new Guid("b21e5a57-89ab-cdef-0123-456789abcdef"),
             Quantidade = 2
@@ -34,7 +34,7 @@ public class PedidoApiTest
         _testsFixture.Client.AtribuirToken(_testsFixture.UsuarioToken);
         
         // Act 
-        var response = await _testsFixture.Client.PostAsJsonAsync("api/carrinho", itemInfo);
+        var response = await _testsFixture.Client.PostAsJsonAsync("api/carrinho", item);
         
         // Assert
         response.EnsureSuccessStatusCode();

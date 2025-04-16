@@ -18,7 +18,7 @@ public class ConfigurationHelper
     public ConfigurationHelper()
     {
         _config = new ConfigurationBuilder()
-            .AddJsonFile("appsettings.json")
+            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
             .Build();
     }
 }

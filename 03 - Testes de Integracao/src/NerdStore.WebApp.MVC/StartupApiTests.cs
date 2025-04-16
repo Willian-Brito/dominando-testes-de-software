@@ -1,12 +1,7 @@
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using NerdStore.Catalogo.Application.AutoMapper;
-using NerdStore.Catalogo.Infrastructure;
-using NerdStore.Vendas.Infrastructure;
-using NerdStore.WebApp.MVC.Data;
 using NerdStore.WebApp.MVC.Setup;
 
 namespace NerdStore.WebApp.MVC;
