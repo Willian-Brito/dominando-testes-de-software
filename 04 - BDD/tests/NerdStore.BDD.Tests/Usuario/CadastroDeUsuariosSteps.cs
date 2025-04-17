@@ -50,44 +50,46 @@ public class CadastroDeUsuariosSteps
     public void QuandoPreencherOsDadosDoFormularioComUmaSenhaSemMaiusculas(Table table)
     {
         // Arrange
-        // _testsFixture.GerarDadosUsuario();
-        // var usuario = _testsFixture.Usuario;
-        // usuario.Senha = "teste@123";
+        _testsFixture.GerarDadosUsuario();
+        var usuario = _testsFixture.Usuario;
+        usuario.Senha = "teste@123";
 
         // Act
-        // _cadastroUsuarioTela.PreencherFormularioRegistro(usuario);
+        _cadastroUsuarioTela.PreencherFormularioRegistro(usuario);
 
         // Assert
-        // Assert.True(_cadastroUsuarioTela.ValidarPreenchimentoFormularioRegistro(usuario));
+        Assert.True(_cadastroUsuarioTela.ValidarPreenchimentoFormularioRegistro(usuario));
     }
 
     [When(@"Preencher os dados do formulario com uma senha sem caractere especial")]
     public void QuandoPreencherOsDadosDoFormularioComUmaSenhaSemCaractereEspecial(Table table)
     {
         // Arrange
-        // _testsFixture.GerarDadosUsuario();
-        // var usuario = _testsFixture.Usuario;
-        // usuario.Senha = "Teste123";
+        _testsFixture.GerarDadosUsuario();
+        var usuario = _testsFixture.Usuario;
+        usuario.Senha = "Teste123";
 
         // Act
-        // _cadastroUsuarioTela.PreencherFormularioRegistro(usuario);
+        _cadastroUsuarioTela.PreencherFormularioRegistro(usuario);
 
         // Assert
-        // Assert.True(_cadastroUsuarioTela.ValidarPreenchimentoFormularioRegistro(usuario));
+        Assert.True(_cadastroUsuarioTela.ValidarPreenchimentoFormularioRegistro(usuario));
     }
 
 
     [Then(@"Ele receberá uma mensagem de erro que a senha precisa conter uma letra maiuscula")]
     public void EntaoEleReceberaUmaMensagemDeErroQueASenhaPrecisaConterUmaLetraMaiuscula()
     {
-        // Assert.True(_cadastroUsuarioTela
-        //     .ValidarMensagemDeErroFormulario("Passwords must have at least one uppercase ('A'-'Z')"));
+        Assert.True(_cadastroUsuarioTela
+            .ValidarMensagemDeErroFormulario("Passwords must have at least one uppercase ('A'-'Z')")
+        );
     }
 
     [Then(@"Ele receberá uma mensagem de erro que a senha precisa conter um caractere especial")]
     public void EntaoEleReceberaUmaMensagemDeErroQueASenhaPrecisaConterUmCaractereEspecial()
     {
-        // Assert.True(_cadastroUsuarioTela
-        //     .ValidarMensagemDeErroFormulario("Passwords must have at least one non alphanumeric character"));
+        Assert.True(_cadastroUsuarioTela
+            .ValidarMensagemDeErroFormulario("Passwords must have at least one non alphanumeric character")
+        );
     }
 }

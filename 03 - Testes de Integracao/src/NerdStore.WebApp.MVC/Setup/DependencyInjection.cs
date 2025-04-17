@@ -13,6 +13,7 @@ using NerdStore.Vendas.Application.Queries;
 using NerdStore.Vendas.Domain;
 using NerdStore.Vendas.Infrastructure;
 using NerdStore.Vendas.Infrastructure.Repository;
+using NerdStore.WebApp.MVC.Areas.Identity;
 using NerdStore.WebApp.MVC.Data;
 
 namespace NerdStore.WebApp.MVC.Setup;
@@ -42,6 +43,9 @@ public static class DependencyInjection
         services.AddScoped<IRequestHandler<AplicarVoucherPedidoCommand, bool>, PedidoCommandHandler>();
 
         services.AddAutoMapper(typeof(DomainToViewModelMappingProfile), typeof(ViewModelToDomainMappingProfile));
+        
+        // Identity
+        services.AddScoped<ISeedUserInitial, SeedUserInitial>();
     }
     
     public static void AddDatabaseContext(this IServiceCollection services, IConfiguration configuration)
@@ -76,6 +80,15 @@ public static class DependencyInjection
             MigrateDb<ApplicationDbContext>(serviceScope);
             MigrateDb<CatalogoContext>(serviceScope);
             MigrateDb<VendasContext>(serviceScope);
+        }
+    }
+    
+    public static async Task SeedUser(this IApplicationBuilder app)
+    {
+        using (var serviceScope = app.ApplicationServices.CreateScope())
+        {
+            var seed = serviceScope.ServiceProvider.GetService<ISeedUserInitial>();
+            await seed.SeedUser();
         }
     }
     
