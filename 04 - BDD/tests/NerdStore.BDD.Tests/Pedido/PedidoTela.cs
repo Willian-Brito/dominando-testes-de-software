@@ -54,6 +54,11 @@ public class PedidoTela : PageObjectModel
 
     public decimal ObterValorTotalCarrinho()
     {
+        var elemento = Helper.ObterElementoPorXPath("/html/body/header/nav/div/div/ul/li[3]/a");
+        var quantidade = elemento.Text.ApenasNumeros();
+        
+        if(quantidade == 0) return 0;
+        
         var valor = Helper.ObterTextoElementoPorId("valorTotalCarrinho");
         var valorLimpo = valor.Replace("R$", "")
             .Replace("R", "")

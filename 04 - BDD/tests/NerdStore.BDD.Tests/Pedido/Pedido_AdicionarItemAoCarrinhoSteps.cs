@@ -27,7 +27,7 @@ public class Pedido_AdicionarItemAoCarrinhoSteps
         // Arrange
         var usuario = new Usuario.Usuario
         {
-            Email = "willian_brito00@hotmail.com",
+            Email = "teste@teste.com",
             Senha = "#Teste@123"
         };
         
