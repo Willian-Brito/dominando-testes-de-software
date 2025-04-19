@@ -39,25 +39,34 @@ public class CarrinhoController : ControllerBase
     [Route("meu-carrinho")]
     public async Task<IActionResult> AdicionarItem(Guid id, int quantidade)
     {
-        var produto = await _produtoService.ObterPorId(id);
-        if (produto == null) return BadRequest();
-
-        if (produto.QuantidadeEstoque < quantidade)
+        try
         {
-            TempData["Erro"] = "Produto com estoque insuficiente";
+            var produto = await _produtoService.ObterPorId(id);
+            if (produto == null) return BadRequest();
+
+            if (produto.QuantidadeEstoque < quantidade)
+            {
+                TempData["Erro"] = "Produto com estoque insuficiente";
+                return RedirectToAction("ProdutoDetalhe", "Vitrine", new { id });
+            }
+
+            var command =
+                new AdicionarItemPedidoCommand(ClienteId, produto.Id, produto.Nome, quantidade, produto.Valor);
+            await _mediatorHandler.Send(command);
+            
+            if (OperacaoValida())
+            {
+                return RedirectToAction("Index");
+            }
+
+            TempData["Erros"] = ObterMensagensErro();
             return RedirectToAction("ProdutoDetalhe", "Vitrine", new { id });
         }
-
-        var command = new AdicionarItemPedidoCommand(ClienteId, produto.Id, produto.Nome, quantidade, produto.Valor);
-        await _mediatorHandler.Send(command);
-
-        if (OperacaoValida())
+        catch (Exception e)
         {
-            return RedirectToAction("Index");
+            TempData["Erro"] = e.Message;
+            return RedirectToAction("ProdutoDetalhe", "Vitrine", new { id });
         }
-
-        TempData["Erros"] = ObterMensagensErro();
-        return RedirectToAction("ProdutoDetalhe", "Vitrine", new { id });
     }
 
     [HttpPost]

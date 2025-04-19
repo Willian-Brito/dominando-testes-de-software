@@ -91,7 +91,7 @@ public class IntegrationTestsFixture<TStartup> : IDisposable where TStartup : cl
     private async Task CriarUsuario()
     {
         UsuarioEmail = "teste@teste.com";
-        UsuarioSenha = "Teste@123";
+        UsuarioSenha = "#Teste@123";
         
         var userManager = Services.GetRequiredService<UserManager<IdentityUser>>();
         

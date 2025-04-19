@@ -26,7 +26,7 @@ public class SeedUserInitial : ISeedUserInitial
             usuario.LockoutEnabled = false;
             usuario.SecurityStamp = Guid.NewGuid().ToString();
 
-            await _userManager.CreateAsync(usuario, "Teste@123");
+            await _userManager.CreateAsync(usuario, "#Teste@123");
         }
     }
 }

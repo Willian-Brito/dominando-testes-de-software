@@ -156,7 +156,7 @@ namespace NerdStore.Catalogo.Infrastructure.Migrations
                             Descricao = "Capacidade maior para quem precisa de mais energia",
                             Imagem = "caneca2.jpg",
                             Nome = "Caneca Gamer XL",
-                            QuantidadeEstoque = 8,
+                            QuantidadeEstoque = 20,
                             Valor = 15m,
                             Altura = 12M,
                             Largura = 8M,

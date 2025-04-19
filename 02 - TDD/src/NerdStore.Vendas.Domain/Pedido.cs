@@ -92,7 +92,7 @@ public class Pedido : Entity, IAggregateRoot
             quantidadeItems += itemExistente.Quantidade;
         }
 
-        if (quantidadeItems > MAX_UNIDADES_ITEM) throw new DomainException($"Máximo de {MAX_UNIDADES_ITEM} unidades por produto.");
+        if (quantidadeItems > MAX_UNIDADES_ITEM) throw new DomainException($"A quantidade máxima de um item é {MAX_UNIDADES_ITEM}");
     }
 
     public void AdicionarItem(PedidoItem item)

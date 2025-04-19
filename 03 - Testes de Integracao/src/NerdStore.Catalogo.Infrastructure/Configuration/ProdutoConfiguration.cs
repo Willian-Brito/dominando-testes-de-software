@@ -100,7 +100,7 @@ public class ProdutoConfiguration : IEntityTypeConfiguration<Produto>
                 CategoriaId = new Guid("1b8a1e23-5a9d-42c2-a632-798e3a4a88a2"),
                 DataCadastro = new DateTime(2025, 2, 1),
                 Imagem = "caneca2.jpg",
-                QuantidadeEstoque = 8,
+                QuantidadeEstoque = 20,
                 Altura = 12M,
                 Largura = 8M,
                 Profundidade = 5M

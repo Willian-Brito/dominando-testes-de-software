@@ -4,9 +4,10 @@ Feature: Pedido - Adicionar Item ao Carrinho
   Para que eu possa comprá-lo posteriormente
   
   Scenario: Adicionar Item com sucesso a um novo pedido
-    Given Que um produto esteja na vitrine
-    And Esteja disponível no estoque
-    And O usuário esteja logado
+    Given O usuario esteja logado
+    And Que um produto esteja na vitrine
+    And Esteja disponivel no estoque
+    And Não tenha nenhum produto adicionado ao carrinho
     When O usuário adicionar uma unidade ao carrinho
     Then O usuário será redirecionado ao resumo da compra
     And O valor total do pedido será exatamente o valor do item adicionado
@@ -34,5 +35,4 @@ Feature: Pedido - Adicionar Item ao Carrinho
     And Esteja disponivel no estoque
     And O mesmo produto já tenha sido adicionado ao carrinho anteriormente
   When O usuário adicionar a quantidade máxima permitida ao carrinho
-  Then O usuário será redirecionado ao resumo da compra
-    And Receberá uma mensagem de erro mencionando que foi ultrapassada a quantidade limite
+  Then Receberá uma mensagem de erro mencionando que foi ultrapassada a quantidade limite

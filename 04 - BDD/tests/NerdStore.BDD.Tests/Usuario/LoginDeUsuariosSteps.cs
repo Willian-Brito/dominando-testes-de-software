@@ -34,7 +34,7 @@ public class LoginDeUsuariosSteps
         var usuario = new Usuario
         {
             Email = "teste@teste.com",
-            Senha = "Teste@123"
+            Senha = "#Teste@123"
         };
         _testsFixture.Usuario = usuario;
 
