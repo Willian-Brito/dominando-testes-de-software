@@ -414,21 +414,32 @@ O terceiro termo especifica a condição ou contexto em que o teste ocorre. Exem
   <img src="https://raw.githubusercontent.com/Willian-Brito/dominando-testes-de-software/refs/heads/main/03%20-%20Testes%20de%20Integracao/src/NerdStore.WebApp.MVC/wwwroot/prints/testes.png" />
 </div>
 
-## 🎨 Demos 
+## 🎨 Testes End-to-End (E2E)
 
 ### 🖥️ Adicionar item com sucesso a um novo pedido
 <div align="center">
-  <img src="https://raw.githubusercontent.com/Willian-Brito/nerd-store/refs/heads/main/src/WebApps/NerdStore.WebApp.MVC/wwwroot/prints/tela-de-administracao.png" alt="tela de administração de produtos" />
+  <img src="https://raw.githubusercontent.com/Willian-Brito/dominando-testes-de-software/refs/heads/main/03%20-%20Testes%20de%20Integracao/src/NerdStore.WebApp.MVC/wwwroot/prints/Adicionar%20item%20com%20sucesso%20a%20um%20novo%20pedido.gif" />
 </div>
 
 ### 🖥️ Adicionar item já existente no carrinho
+<div align="center">
+  <img src="https://raw.githubusercontent.com/Willian-Brito/dominando-testes-de-software/refs/heads/main/03%20-%20Testes%20de%20Integracao/src/NerdStore.WebApp.MVC/wwwroot/prints/Adicionar%20item%20j%C3%A1%20existente%20no%20carrinho.gif" />
+</div>
 
 ### 🖥️ Adicionar itens acima do limite
+<div align="center">
+  <img src="https://raw.githubusercontent.com/Willian-Brito/dominando-testes-de-software/refs/heads/main/03%20-%20Testes%20de%20Integracao/src/NerdStore.WebApp.MVC/wwwroot/prints/Adicionar%20itens%20acima%20do%20limite.gif" />
+</div>
 
 ### 🖥️ Cadastro de usuário com sucesso
+<div align="center">
+  <img src="https://raw.githubusercontent.com/Willian-Brito/dominando-testes-de-software/refs/heads/main/03%20-%20Testes%20de%20Integracao/src/NerdStore.WebApp.MVC/wwwroot/prints/Cadastro%20de%20usu%C3%A1rio%20com%20sucesso.gif" />
+</div>
 
 ### 🖥️ Realizar login com sucesso
-
+<div align="center">
+  <img src="https://raw.githubusercontent.com/Willian-Brito/dominando-testes-de-software/refs/heads/main/03%20-%20Testes%20de%20Integracao/src/NerdStore.WebApp.MVC/wwwroot/prints/Realizar%20login%20com%20sucesso.gif" />
+</div>
 
 ## 📝 Licença
 
