@@ -41,8 +41,6 @@ Este projeto reúne exemplos práticos e organizados de como implementar diverso
 - **APDEX** – Índice de Satisfação de Usuário.
 - Boas práticas sobre como estruturar e executar testes de carga.
 
----
-
 
 ## 🧰 Bibliotecas Utilizadas
 
@@ -55,7 +53,6 @@ Este projeto reúne exemplos práticos e organizados de como implementar diverso
 | HTML Parsing | `AngleSharp` |
 | E2E | `Selenium.WebDriver` |
 
----
 
 ## 🧠 Conceitos Importantes
 
@@ -64,17 +61,27 @@ Aqui estão explicações essenciais para compreender melhor os fundamentos por 
 ### 🛠️ TDD
 
 **TDD** (Test Driven Development) é uma prática de desenvolvimento onde os testes são escritos **antes** do código de produção. O ciclo básico é:
+
 1. Escrever um teste que falha.
 2. Escrever o mínimo de código necessário para passar o teste.
 3. Refatorar o código garantindo que o teste continue passando.
 
-Essa abordagem garante um design de software mais limpo, melhora a confiabilidade do sistema e reduz o retrabalho.
+Essa abordagem garante um design de software mais limpo, melhora a confiabilidade do sistema e reduz 
+o retrabalho.
+
+<div align="center">
+  <img src="https://raw.githubusercontent.com/Willian-Brito/dominando-testes-de-software/refs/heads/main/03%20-%20Testes%20de%20Integracao/src/NerdStore.WebApp.MVC/wwwroot/prints/TDD.png" width="400" height="300"/>
+</div>
 
 ### 🎯 BDD
 
 **BDD** (Behavior Driven Development) é uma evolução do TDD que enfatiza a descrição do comportamento do sistema do ponto de vista do usuário. Em BDD, escrevemos especificações legíveis tanto por técnicos quanto por não técnicos (como Product Owners).
 
 Para os testes end-to-end deste projeto, adotei o **BDD** para estruturar os cenários, focando em capturar o comportamento esperado de cada funcionalidade, simulando a experiência real de uso.
+
+<div align="center">
+  <img src="https://raw.githubusercontent.com/Willian-Brito/dominando-testes-de-software/refs/heads/main/03%20-%20Testes%20de%20Integracao/src/NerdStore.WebApp.MVC/wwwroot/prints/BDD.png" width="700" height="350"/>
+</div>
 
 #### 📋 Exemplo de Cenário BDD
 
@@ -95,6 +102,10 @@ Funcionalidade: Tela de login
 ### 📄 POM (Page Object Model)
 O **POM (Page Object Model)** é um padrão de design utilizado para organizar o código de testes de interface gráfica, especialmente quando usamos ferramentas como Selenium.
 
+<div align="center">
+  <img src="https://raw.githubusercontent.com/Willian-Brito/dominando-testes-de-software/refs/heads/main/03%20-%20Testes%20de%20Integracao/src/NerdStore.WebApp.MVC/wwwroot/prints/POM%20-%20Page%20Object%20Model.png"/>
+</div>
+
 **No POM:**
 
  - Cada página ou tela da aplicação é representada por uma classe.
@@ -106,6 +117,7 @@ O **POM (Page Object Model)** é um padrão de design utilizado para organizar o
 - Reduz duplicação de código.
 - Facilita a manutenção (uma mudança na interface afeta apenas a classe correspondente).
 - Deixa os testes mais legíveis e organizados.
+
 
 🔹 **Exemplo de Classe POM (Selenium):**
 
@@ -187,20 +199,28 @@ Muitas vezes o teste é disparado contra uma funcionalidade específica para obs
 
 ### 📈 APDEX
 
-**APDEX (Application Performance Index)** é uma métrica padrão usada para medir a satisfação dos usuários em relação à performance de uma aplicação. 
+**APDEX (Application Performance Index)** é uma métrica padrão usada para medir a satisfação dos usuários em relação à performance de uma aplicação. O APDEX é representado como um valor entre 0 e 1, onde 1 significa que todos os usuários estão satisfeitos.
 
-O APDEX é representado como um valor entre 0 e 1, onde 1 significa que todos os usuários estão satisfeitos.
+**Formula:**
+<div align="center">
+  <img src="https://raw.githubusercontent.com/Willian-Brito/dominando-testes-de-software/refs/heads/main/03%20-%20Testes%20de%20Integracao/src/NerdStore.WebApp.MVC/wwwroot/prints/Formula%20APDEX.png" width=700 height=300/>
+</div>
 
 **Critérios de Avaliação:**
-- **Excelente**: APDEX ≥ 0,94
-- **Bom**: 0,85 ≤ APDEX < 0,94
-- **Aceitável**: 0,70 ≤ APDEX < 0,85
-- **Ruim**: 0,50 ≤ APDEX < 0,70
-- **Inaceitável**: APDEX < 0,50
 
 Essa métrica é essencial para avaliar a qualidade percebida de sistemas em testes de carga.
+<div align="center">
+  <img src="https://raw.githubusercontent.com/Willian-Brito/dominando-testes-de-software/refs/heads/main/03%20-%20Testes%20de%20Integracao/src/NerdStore.WebApp.MVC/wwwroot/prints/APDEX%20Score.png" width=500 height=250/>
+</div>
 
----
+**Resultados:**
+<div align="center">
+  <img src="https://raw.githubusercontent.com/Willian-Brito/dominando-testes-de-software/refs/heads/main/03%20-%20Testes%20de%20Integracao/src/NerdStore.WebApp.MVC/wwwroot/prints/APDEX.png" />
+</div>
+
+<div align="center">
+  <img src="https://raw.githubusercontent.com/Willian-Brito/dominando-testes-de-software/refs/heads/main/03%20-%20Testes%20de%20Integracao/src/NerdStore.WebApp.MVC/wwwroot/prints/response%20time%20overview.png" />
+</div>
 
 ## ✅ Roteiro de Testes de Unidade para um CRUD
 
@@ -353,7 +373,6 @@ O terceiro termo especifica a condição ou contexto em que o teste ocorre. Exem
   - Deve lançar uma exceção ao tentar remover um registro com um ID inválido.  
   - Exemplo: **ArgumentException** ao passar um ID nulo ou menor que zero.
 
----
 
 ## 🔧 Instalação
 1. **Pré-requisitos**: 
@@ -389,7 +408,11 @@ O terceiro termo especifica a condição ou contexto em que o teste ocorre. Exem
 ```bash
  $  dotnet test
 ```
----
+
+**Categorias de teste:**
+<div align="center">
+  <img src="https://raw.githubusercontent.com/Willian-Brito/dominando-testes-de-software/refs/heads/main/03%20-%20Testes%20de%20Integracao/src/NerdStore.WebApp.MVC/wwwroot/prints/testes.png" />
+</div>
 
 ## 🎨 Demos 
 
@@ -406,10 +429,9 @@ O terceiro termo especifica a condição ou contexto em que o teste ocorre. Exem
 
 ### 🖥️ Realizar login com sucesso
 
----
 
 ## 📝 Licença
 
-Este projeto esta sobe a licença [MIT](https://github.com/Willian-Brito/dominando-teste-de-software/blob/main/LICENSE).
+Este projeto esta sobe a licença [MIT](https://github.com/Willian-Brito/dominando-testes-de-software/blob/main/LICENSE).
 
 Feito com ❤️ por Willian Brito 👋🏽 [Entre em contato!](https://www.linkedin.com/in/willian-ferreira-brito/)
