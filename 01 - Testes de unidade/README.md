@@ -11,7 +11,7 @@ Antes de iniciar os testes, configurar:
 
 **Tipos de padrões de nomes:**
 <div align="center">
-  <img src="https://raw.githubusercontent.com/Willian-Brito/dominando-testes-de-software/refs/heads/main/03%20-%20Testes%20de%20Integracao/src/NerdStore.WebApp.MVC/wwwroot/prints/Nomeclatura%20de%20Testes%20de%20Unidade.png" />
+  <img src="https://raw.githubusercontent.com/Willian-Brito/dominando-testes-de-software/refs/heads/main/03%20-%20Testes%20de%20Integracao/src/NerdStore.WebApp.MVC/wwwroot/prints/Nomeclatura%20de%20Testes%20de%20Unidade.png" width="600"/>
 </div>
 
 Os métodos de teste seguem o padrão **"Método_UmComportamento_Esperado"**, estruturado assim:  
